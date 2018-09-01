@@ -1,17 +1,7 @@
 package pl.sdacademy.spring.mvcdemo;
 
-public class Greeting {
-
-	private long id;
+public class Message {
 	private String content;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public String getContent() {
 		return content;
@@ -20,5 +10,4 @@ public class Greeting {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
 }

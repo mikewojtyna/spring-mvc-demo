@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Show message</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+Default GET Message template
+<form action="#" th:action="@{/message}" th:object="${message}" method="post">
+    <p>Content: <input type="text" th:field="*{content}"/></p>
+    <input type="submit" value="Submit"/>
+</form>
+</body>
+</html>

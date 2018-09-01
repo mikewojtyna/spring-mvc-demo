@@ -12,18 +12,25 @@ import org.springframework.security.config.annotation.web.configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// for now disable the http security
-		http.authorizeRequests().anyRequest().permitAll().and().csrf()
-			.disable();
-
-		// uncomment to enable basic auth
-		//http.authorizeRequests().anyRequest().authenticated().and()
-		//	.httpBasic();
+		http.authorizeRequests().
+			// secure only /secured path
+				antMatchers("/secured").authenticated()
+			// enable form login page (needs a LoginController to
+			// handle the view rendering
+			.and().formLogin().loginPage("/login")
+			// configure form POST params
+			.usernameParameter("user").passwordParameter("pass")
+			// disable CSRF protection (to remove extra
+			// complexity) - should be enabled in production
+			.and().csrf().disable();
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws
 		Exception {
+		// configure in-memory authentication manager to support only
+		// one user with no-op password encoder (note the "{noop}" in
+		// password)
 		auth.inMemoryAuthentication().
 			withUser("goobar").password("{noop}password").roles
 			("USER");
